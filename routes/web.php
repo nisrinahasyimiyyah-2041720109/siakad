@@ -21,3 +21,6 @@ Route::get('/', function () {
 */
 
 Route::resource('mahasiswa', MahasiswaController::class);
+
+//Route search
+Route::get('/search', [MahasiswaController::class, 'search'])->name('search');
