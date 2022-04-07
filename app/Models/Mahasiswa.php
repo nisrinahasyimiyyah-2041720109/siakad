@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; //Model Eloquent
+use App\Models\Kelas;
 
 class Mahasiswa extends Model //Definisi Model
 {
@@ -18,12 +19,17 @@ class Mahasiswa extends Model //Definisi Model
      * @var array
      */
     protected $fillable = [
-        'Nim',
-        'Nama',
-        'Kelas',
-        'Jurusan',
-        'Email',
-        'Alamat',
+        'nim',
+        'nama',
+        'kelas_id',
+        'jurusan',
+        'email',
+        'alamat',
         'tanggal_lahir',
     ];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 };
