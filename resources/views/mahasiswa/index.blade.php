@@ -37,11 +37,11 @@
             <th>Tanggal Lahir</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($mahasiswa as $mhs)
+        @foreach ($paginate as $mhs)
         <tr>
             <td>{{ $mhs->nim }}</td>
             <td>{{ $mhs->nama }}</td> 
-            <td>{{ $mhs->kelas }}</td>
+            <td>{{ $mhs->kelas->nama_kelas }}</td>
             <td>{{ $mhs->jurusan }}</td>  
             <td>{{ $mhs->email }}</td>
             <td>{{ $mhs->alamat }}</td>
@@ -61,6 +61,6 @@
         @endforeach
     </table>
     <div class="d-flexs">
-        {{ $mahasiswa->links() }}
+        {{ $paginate->links() }}
     </div>
 @endsection
