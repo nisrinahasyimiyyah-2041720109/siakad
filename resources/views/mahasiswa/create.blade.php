@@ -19,7 +19,7 @@
                     </div>
                 @endif
                     <form method="post" action="{{ route('mahasiswa.store') }}" id="myForm">
-                        @csrf 
+                        @csrf
                             <div class="form-group">
                                 <label for="Nim">Nim</label>
                                 <input type="text" name="Nim" class="form-control" id="Nim" aria-describedby="Nim">
@@ -29,8 +29,12 @@
                                 <input type="Nama" name="Nama" class="form-control" id="Nama" aria-describedby="Nama">
                             </div>
                             <div class="form-group">
-                                <label for="Kelas">Kelas</label>
-                                <input type="Kelas" name="Kelas" class="form-control" id="Kelas" aria-describedby="Kelas">
+                                <label for="kelas_id">Kelas</label>
+                                <select class="form-control" name="kelas_id" id="kelas_id" aria-describedby="kelas_id">
+                                @foreach($kelas as $kls)
+                                    <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                                @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="Jurusan">Jurusan</label>

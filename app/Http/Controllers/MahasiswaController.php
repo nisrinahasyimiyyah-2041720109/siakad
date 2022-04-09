@@ -36,7 +36,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        $kelas = Kelas::all(); //mendapatkan data dari tabel kelas
+        return view('mahasiswa.create', compact('kelas'));
+        
+        //return view('mahasiswa.create');
     }
 
     /**
@@ -46,23 +49,31 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {      
         //melakukan validasi data
         $request->validate([
             'Nim'=>'required',
-            'Nama'=>'required',
-            'Kelas'=>'required',
+            'Nama'=>'required',           
             'Jurusan'=>'required',
             'Email'=>'required',
             'Alamat'=>'required',
             'tanggal_lahir'=>'required',
+            'kelas_id'=>'required',
         ]);
 
-        //fungsi eloquent untuk menambah data
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->nim = $request->get('Nim');
+        $mahasiswa->nama = $request->get('Nama');
+        $mahasiswa->jurusan = $request->get('Jurusan');
+        $mahasiswa->email = $request->get('Email');
+        $mahasiswa->alamat = $request->get('Alamat');
+        $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+        $mahasiswa->kelas_id = $request->get('kelas_id');
+
         Mahasiswa::create($request->all());
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
-            ->with('success','Mahasiswa Berhasil Ditambahkan');
+            ->with('success', 'Mahasiswa Berhasil Ditambahkan');
     }
 
     /**

@@ -10,6 +10,7 @@ class Kelas extends Model
 {
     use HasFactory;
     protected $table = 'kelas'; //mendefinisikan bahwa model ini terkait dengan tabel kelas
+    protected $primaryKey='id'; // Memanggil isi DB dengan primaryKey
 
     public function mahasiswa()
     {
