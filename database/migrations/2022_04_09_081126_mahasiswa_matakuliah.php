@@ -13,7 +13,15 @@ class MahasiswaMatakuliah extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('mahasiswa_matakuliah', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('mahasiswa_id')->nullable();
+            $table->unsignedBigInteger('matakuliah_id')->nullable();
+            //menambahkan foreign key 
+            $table->foreign('mahasiswa_id')->references('id_mahasiswa')->on('mahasiswa');
+            $table->foreign('matakuliah_id')->references('id')->on('matakuliah');
+            $table->string('nilai', 2);
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class MahasiswaMatakuliah extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('mahasiswa_matakuliah');
     }
 }
