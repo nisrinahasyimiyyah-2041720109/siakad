@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; //Model Eloquent
 use App\Models\Kelas;
+use App\Models\MataKuliah;
 
 class Mahasiswa extends Model //Definisi Model
 {
@@ -31,5 +32,10 @@ class Mahasiswa extends Model //Definisi Model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
+    }
+
+    public function matakuliah()
+    {
+        return $this->belongsToMany(MataKuliah::class);
     }
 };
