@@ -24,3 +24,6 @@ Route::resource('mahasiswa', MahasiswaController::class);
 
 //Route search
 Route::get('/search', [MahasiswaController::class, 'search'])->name('search');
+
+//Route halaman nilai
+Route::get('/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');

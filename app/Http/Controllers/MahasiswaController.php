@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\Mahasiswa_MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -96,6 +97,7 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($Nim)
     {
         //menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
@@ -159,7 +161,15 @@ class MahasiswaController extends Controller
     {
         $keyword = $request->search;
         $mahasiswa = Mahasiswa::where('nama', 'like', "%" . $keyword . "%")->paginate(3);
-        return view('mahasiswa.index', compact('mahasiswa'))
-            ->with('i', (request()->input('page', 1) -1) * 5);
+        return view('mahasiswa.index', [
+            'paginate' => $mahasiswa
+        ]);
+    }
+    
+    public function nilai($Id)
+    {
+        $matkulmhs = Mahasiswa_MataKuliah::with('matakuliah')->where('mahasiswa_id', $Id)->get();
+        $matkulmhs->mahasiswa = Mahasiswa::with('kelas')->where('id_mahasiswa', $Id)->first();
+        return view('mahasiswa.khs', compact('matkulmhs'));  
     }
 }
