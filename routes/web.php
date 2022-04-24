@@ -27,3 +27,6 @@ Route::get('/search', [MahasiswaController::class, 'search'])->name('search');
 
 //Route halaman nilai
 Route::get('/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
+
+//Route untuk menjalankan fungsi cetak pdf
+Route::get('/cetak_pdf/{id}', [MahasiswaController::class, 'cetak_pdf'])->name('cetak_pdf');

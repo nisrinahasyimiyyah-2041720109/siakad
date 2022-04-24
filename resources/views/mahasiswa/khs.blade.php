@@ -34,4 +34,10 @@
         </tr>
         @endforeach
     </table>
+
+    <div class="row">
+        <div style="margin:25px 0px 0px 500px">
+            <a class="btn btn-success" href="{{ route('cetak_pdf',$matkulmhs->mahasiswa->id_mahasiswa) }}">Cetak Ke PDF</a>
+        </div>
+    </div><br>
 @endsection
