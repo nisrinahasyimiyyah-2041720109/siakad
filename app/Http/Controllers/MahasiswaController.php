@@ -60,7 +60,12 @@ class MahasiswaController extends Controller
             'Alamat'=>'required',
             'tanggal_lahir'=>'required',
             'kelas_id'=>'required',
+            'foto'=>'required',
         ]);
+
+        if ($request->file('foto')) {
+            $nama_foto = $request->file('foto')->store('foto', 'public');
+        }
 
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('Nim');
@@ -70,6 +75,7 @@ class MahasiswaController extends Controller
         $mahasiswa->alamat = $request->get('Alamat');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
         $mahasiswa->kelas_id = $request->get('kelas_id');
+        $mahasiswa->foto = $nama_foto;
 
         Mahasiswa::create($request->all());
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
@@ -125,6 +131,7 @@ class MahasiswaController extends Controller
             'Alamat'=>'required',
             'tanggal_lahir'=>'required',
             'kelas_id'=>'required',
+            'foto'=>'required',
         ]);
 
         $mahasiswa = Mahasiswa::with('kelas')->where('nim', $Nim)->first();
@@ -135,6 +142,14 @@ class MahasiswaController extends Controller
         $mahasiswa->alamat = $request->get('Alamat');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
         $mahasiswa->kelas_id = $request->get('kelas_id');
+
+        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+            \Storage::delete('public/' . $mahasiswa->foto);
+        }
+
+        $nama_foto = $request->file('foto')->store('foto', 'public');
+        $mahasiswa->foto = $nama_foto;
+
         $mahasiswa->save();
         
         //jika data berhasil diupdate, akan kembali ke halaman utama
